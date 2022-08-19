@@ -9,7 +9,6 @@ public class OrganisationsService implements IOrganisationsService {
     @Override
     public OrganisationsTablePageData getOrganisationsTableData(SearchFilter filter) {
         OrganisationsTablePageData pageData = new OrganisationsTablePageData();
-// TODO [Luka] fill pageData.
         return pageData;
     }
 }

@@ -3,6 +3,8 @@ package com.velebit.anippe.shared.admin.organisation;
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
 
+import java.util.Date;
+
 import javax.annotation.Generated;
 
 /**
@@ -49,5 +51,55 @@ public class OrganisationsTablePageData extends AbstractTablePageData {
 
     public static class OrganisationsTableRowData extends AbstractTableRowData {
         private static final long serialVersionUID = 1L;
+        public static final String organisationId = "organisationId";
+        public static final String name = "name";
+        public static final String subdomain = "subdomain";
+        public static final String address = "address";
+        public static final String createdAt = "createdAt";
+        private Integer m_organisationId;
+        private String m_name;
+        private String m_subdomain;
+        private String m_address;
+        private Date m_createdAt;
+
+        public Integer getOrganisationId() {
+            return m_organisationId;
+        }
+
+        public void setOrganisationId(Integer newOrganisationId) {
+            m_organisationId = newOrganisationId;
+        }
+
+        public String getName() {
+            return m_name;
+        }
+
+        public void setName(String newName) {
+            m_name = newName;
+        }
+
+        public String getSubdomain() {
+            return m_subdomain;
+        }
+
+        public void setSubdomain(String newSubdomain) {
+            m_subdomain = newSubdomain;
+        }
+
+        public String getAddress() {
+            return m_address;
+        }
+
+        public void setAddress(String newAddress) {
+            m_address = newAddress;
+        }
+
+        public Date getCreatedAt() {
+            return m_createdAt;
+        }
+
+        public void setCreatedAt(Date newCreatedAt) {
+            m_createdAt = newCreatedAt;
+        }
     }
 }
