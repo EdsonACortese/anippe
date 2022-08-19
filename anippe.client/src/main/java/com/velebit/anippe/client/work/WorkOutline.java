@@ -2,6 +2,8 @@ package com.velebit.anippe.client.work;
 
 import com.velebit.anippe.client.work.customer.CustomersTablePage;
 import com.velebit.anippe.client.work.lead.LeadsTablePage;
+import com.velebit.anippe.client.work.project.ProjectsTablePage;
+import com.velebit.anippe.client.work.utility.UtilityNodePage;
 import com.velebit.anippe.shared.Icons;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
@@ -23,6 +25,8 @@ public class WorkOutline extends AbstractOutline {
 
     pageList.add(new CustomersTablePage());
     pageList.add(new LeadsTablePage());
+    pageList.add(new ProjectsTablePage());
+    pageList.add(new UtilityNodePage());
   }
 
   @Override
