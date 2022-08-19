@@ -1,5 +1,6 @@
 package com.velebit.anippe.client.settings.users;
 
+import com.velebit.anippe.client.settings.roles.RolesTablePage;
 import com.velebit.anippe.shared.FontIcons;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
@@ -14,6 +15,7 @@ public class UsersNodePage extends AbstractPageWithNodes {
     super.execCreateChildPages(pageList);
 
     pageList.add(new UsersTablePage());
+    pageList.add(new RolesTablePage());
   }
 
   @Override

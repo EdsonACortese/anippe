@@ -49,5 +49,45 @@ public class RolesTablePageData extends AbstractTablePageData {
 
     public static class RolesTableRowData extends AbstractTableRowData {
         private static final long serialVersionUID = 1L;
+        public static final String roleId = "roleId";
+        public static final String code = "code";
+        public static final String name = "name";
+        public static final String totalUsers = "totalUsers";
+        private Integer m_roleId;
+        private String m_code;
+        private String m_name;
+        private Integer m_totalUsers;
+
+        public Integer getRoleId() {
+            return m_roleId;
+        }
+
+        public void setRoleId(Integer newRoleId) {
+            m_roleId = newRoleId;
+        }
+
+        public String getCode() {
+            return m_code;
+        }
+
+        public void setCode(String newCode) {
+            m_code = newCode;
+        }
+
+        public String getName() {
+            return m_name;
+        }
+
+        public void setName(String newName) {
+            m_name = newName;
+        }
+
+        public Integer getTotalUsers() {
+            return m_totalUsers;
+        }
+
+        public void setTotalUsers(Integer newTotalUsers) {
+            m_totalUsers = newTotalUsers;
+        }
     }
 }
