@@ -7,4 +7,6 @@ public class Constants {
         public static final int TASK = 3;
         public static final int ROLE = 4;
     }
+
+	public static final String DEFAULT_USER_PASSWORD = "user";
 }

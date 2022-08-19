@@ -36,11 +36,10 @@ public class OrganisationDao {
         varname1.append("         o.phone, ");
         varname1.append("         o.website, ");
         varname1.append("         o.street, ");
-        varname1.append("         o.place, ");
+        varname1.append("         o.city, ");
         varname1.append("         o.postal_code, ");
         varname1.append("         c.id, ");
-        varname1.append("         c.name, ");
-        varname1.append("         a.id, ");
+        varname1.append("         c.name ");
         varname1.append("FROM     organisations o, ");
         varname1.append("         countries c ");
         varname1.append("WHERE    o.country_id = c.id ");

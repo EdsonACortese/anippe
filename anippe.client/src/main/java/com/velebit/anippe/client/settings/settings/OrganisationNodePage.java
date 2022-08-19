@@ -1,5 +1,6 @@
 package com.velebit.anippe.client.settings.settings;
 
+import com.velebit.anippe.client.admin.organisation.OrganisationForm;
 import com.velebit.anippe.shared.FontIcons;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
