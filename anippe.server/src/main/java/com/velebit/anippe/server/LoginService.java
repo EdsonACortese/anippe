@@ -29,7 +29,9 @@ public class LoginService implements ILoginService {
 		varname1.append("       u.organisation_id, ");
 		varname1.append("       u.administrator ");
 		varname1.append("FROM   users u ");
-		varname1.append("WHERE  u.username = :username AND u.deleted_at IS NULL  ");
+		varname1.append("WHERE  u.username = :username   ");
+		varname1.append("AND u.deleted_at IS NULL ");
+		varname1.append("AND u.active IS TRUE ");
 		varname1.append("INTO :{user.id}, :{user.Username},:{user.Password}, :{user.firstName}, :{user.lastName}, :{user.organisationId}, :{user.Administrator}");
 		SQL.selectInto(varname1.toString(), new NVPair("user", user), new NVPair("username", userId));
 
@@ -44,7 +46,7 @@ public class LoginService implements ILoginService {
 
 	@Override
 	public Organisation getCurrentOrganisation(Integer organisationId) {
-		return BEANS.get(OrganisationDao.class).find(organisationId);
+		return BEANS.get(OrganisationDao.class).findById(organisationId);
 	}
 
 	@Override
@@ -61,11 +63,10 @@ public class LoginService implements ILoginService {
 		varname1.append("       organisations o ");
 		varname1.append("WHERE  u.organisation_id = o.id ");
 		varname1.append("       AND u.username = :username ");
-		// varname1.append(" AND u.active = true ");
+		varname1.append("       AND u.active = true ");
 		varname1.append("       AND o.deleted_at IS NULL ");
 		varname1.append("       AND u.deleted_at IS NULL ");
-		varname1.append(
-				"INTO :{user.id}, :{user.Username}, :{user.Password}, :{user.Administrator}, :{user.organisationId} ");
+		varname1.append("INTO :{user.id}, :{user.Username}, :{user.Password}, :{user.Administrator}, :{user.organisationId} ");
 		SQL.selectInto(varname1.toString(), new NVPair("user", user), new NVPair("username", username),
 				new NVPair("password", password));
 

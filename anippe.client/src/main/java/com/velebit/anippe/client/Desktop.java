@@ -53,8 +53,7 @@ public class Desktop extends AbstractDesktop {
 
 	@Override
 	protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-		return CollectionUtility.<Class<? extends IOutline>>arrayList(WorkOutline.class, SettingsOutline.class,
-				AdministrationOutline.class);
+		return CollectionUtility.<Class<? extends IOutline>>arrayList(WorkOutline.class, SettingsOutline.class, AdministrationOutline.class);
 	}
 
 	@Override
@@ -242,6 +241,11 @@ public class Desktop extends AbstractDesktop {
 		@Override
 		protected DisplayStyle getConfiguredDisplayStyle() {
 			return DisplayStyle.TAB;
+		}
+
+		@Override
+		public boolean isVisibleGranted() {
+			return ClientSession.get().getCurrentUser().isSuperAdministrator();
 		}
 
 		@Override
