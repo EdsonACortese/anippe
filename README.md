@@ -11,6 +11,7 @@
 
 Anippe is new open source CRM project. Purpose is to build PerfexCRM copy. It is built using Eclipse Scout (Java) framework and PostgreSql database
 
+![Monica's Logo](docs/images/main_app.png)
 
 ## Get started
 
