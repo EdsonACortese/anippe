@@ -6,6 +6,7 @@ import com.velebit.anippe.client.admin.AdministrationOutline;
 import com.velebit.anippe.client.settings.SettingsOutline;
 import com.velebit.anippe.client.work.WorkOutline;
 import com.velebit.anippe.shared.Icons;
+import com.velebit.anippe.shared.beans.User;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
@@ -31,207 +32,221 @@ import java.util.List;
  */
 public class Desktop extends AbstractDesktop {
 
-    public Desktop() {
-        addPropertyChangeListener(PROP_THEME, this::onThemeChanged);
-    }
+	public Desktop() {
+		addPropertyChangeListener(PROP_THEME, this::onThemeChanged);
+	}
 
-    @Override
-    protected String getConfiguredTitle() {
-        return TEXTS.get("ApplicationTitle");
-    }
+	@Override
+	protected String getConfiguredTitle() {
+		return TEXTS.get("ApplicationTitle");
+	}
 
-    @Override
-    protected String getConfiguredLogoId() {
-        return Icons.AppLogo;
-    }
+	@Override
+	protected String getConfiguredLogoId() {
+		return Icons.AppLogo;
+	}
 
-    @Override
-    protected NativeNotificationDefaults getConfiguredNativeNotificationDefaults() {
-        return super.getConfiguredNativeNotificationDefaults().withIconId("application_logo.png");
-    }
+	@Override
+	protected NativeNotificationDefaults getConfiguredNativeNotificationDefaults() {
+		return super.getConfiguredNativeNotificationDefaults().withIconId("application_logo.png");
+	}
 
-    @Override
-    protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-        return CollectionUtility.<Class<? extends IOutline>>arrayList(
-                WorkOutline.class, SettingsOutline.class, AdministrationOutline.class);
-    }
+	@Override
+	protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+		return CollectionUtility.<Class<? extends IOutline>>arrayList(WorkOutline.class, SettingsOutline.class,
+				AdministrationOutline.class);
+	}
 
-    @Override
-    protected void execDefaultView() {
-        selectFirstVisibleOutline();
-    }
+	@Override
+	protected void execDefaultView() {
+		selectFirstVisibleOutline();
+	}
 
-    protected void selectFirstVisibleOutline() {
-        for (IOutline outline : getAvailableOutlines()) {
-            if (outline.isEnabled() && outline.isVisible()) {
-                setOutline(outline.getClass());
-                return;
-            }
-        }
-    }
+	protected void selectFirstVisibleOutline() {
+		User user = ClientSession.get().getCurrentUser();
+		if (user.isSuperAdministrator()) {
+			setOutline(AdministrationOutline.class);
+			return;
+		}
 
-    protected void onThemeChanged(PropertyChangeEvent evt) {
-        IMenu darkMenu = getMenuByClass(DarkThemeMenu.class);
-        IMenu defaultMenu = getMenuByClass(DefaultThemeMenu.class);
-        String newThemeName = (String) evt.getNewValue();
-        if (DarkThemeMenu.DARK_THEME.equalsIgnoreCase(newThemeName)) {
-            darkMenu.setIconId(Icons.CheckedBold);
-            defaultMenu.setIconId(null);
-        } else {
-            darkMenu.setIconId(null);
-            defaultMenu.setIconId(Icons.CheckedBold);
-        }
-    }
+		for (IOutline outline : getAvailableOutlines()) {
+			if (outline.isEnabled() && outline.isVisible()) {
+				setOutline(outline.getClass());
+				return;
+			}
+		}
+	}
 
-    @Order(1000)
-    public class UserProfileMenu extends AbstractMenu {
+	protected void onThemeChanged(PropertyChangeEvent evt) {
+		IMenu darkMenu = getMenuByClass(DarkThemeMenu.class);
+		IMenu defaultMenu = getMenuByClass(DefaultThemeMenu.class);
+		String newThemeName = (String) evt.getNewValue();
+		if (DarkThemeMenu.DARK_THEME.equalsIgnoreCase(newThemeName)) {
+			darkMenu.setIconId(Icons.CheckedBold);
+			defaultMenu.setIconId(null);
+		} else {
+			darkMenu.setIconId(null);
+			defaultMenu.setIconId(Icons.CheckedBold);
+		}
+	}
 
-        @Override
-        protected String getConfiguredKeyStroke() {
-            return IKeyStroke.F10;
-        }
+	@Order(1000)
+	public class UserProfileMenu extends AbstractMenu {
 
-        @Override
-        protected String getConfiguredIconId() {
-            return Icons.PersonSolid;
-        }
+		@Override
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F10;
+		}
 
-        @Override
-        protected String getConfiguredText() {
-            String userId = BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject();
-            return StringUtility.uppercaseFirst(userId);
-        }
+		@Override
+		protected String getConfiguredIconId() {
+			return Icons.PersonSolid;
+		}
 
-        @Order(1000)
-        public class AboutMenu extends AbstractMenu {
+		@Override
+		protected String getConfiguredText() {
+			String userId = BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject();
+			return StringUtility.uppercaseFirst(userId);
+		}
 
-            @Override
-            protected String getConfiguredText() {
-                return TEXTS.get("About");
-            }
+		@Order(1000)
+		public class AboutMenu extends AbstractMenu {
 
-            @Override
-            protected void execAction() {
-                ScoutInfoForm form = new ScoutInfoForm();
-                form.startModify();
-            }
-        }
+			@Override
+			protected String getConfiguredText() {
+				return TEXTS.get("About");
+			}
 
-        @Order(2000)
-        public class ThemeMenu extends AbstractMenu {
+			@Override
+			protected void execAction() {
+				ScoutInfoForm form = new ScoutInfoForm();
+				form.startModify();
+			}
+		}
 
-            @Override
-            protected String getConfiguredText() {
-                return TEXTS.get("Theme");
-            }
+		@Order(2000)
+		public class ThemeMenu extends AbstractMenu {
 
-            @Order(1000)
-            public class DefaultThemeMenu extends AbstractMenu {
+			@Override
+			protected String getConfiguredText() {
+				return TEXTS.get("Theme");
+			}
 
-                private static final String DEFAULT_THEME = "Default";
+			@Order(1000)
+			public class DefaultThemeMenu extends AbstractMenu {
 
-                @Override
-                protected String getConfiguredText() {
-                    return DEFAULT_THEME;
-                }
+				private static final String DEFAULT_THEME = "Default";
 
-                @Override
-                protected void execAction() {
-                    setTheme(DEFAULT_THEME.toLowerCase());
-                }
-            }
+				@Override
+				protected String getConfiguredText() {
+					return DEFAULT_THEME;
+				}
 
-            @Order(2000)
-            public class DarkThemeMenu extends AbstractMenu {
+				@Override
+				protected void execAction() {
+					setTheme(DEFAULT_THEME.toLowerCase());
+				}
+			}
 
-                private static final String DARK_THEME = "Dark";
+			@Order(2000)
+			public class DarkThemeMenu extends AbstractMenu {
 
-                @Override
-                protected String getConfiguredText() {
-                    return DARK_THEME;
-                }
+				private static final String DARK_THEME = "Dark";
 
-                @Override
-                protected void execAction() {
-                    setTheme(DARK_THEME.toLowerCase());
-                }
-            }
-        }
+				@Override
+				protected String getConfiguredText() {
+					return DARK_THEME;
+				}
 
-        @Order(3000)
-        public class LogoutMenu extends AbstractMenu {
+				@Override
+				protected void execAction() {
+					setTheme(DARK_THEME.toLowerCase());
+				}
+			}
+		}
 
-            @Override
-            protected String getConfiguredText() {
-                return TEXTS.get("Logout");
-            }
+		@Order(3000)
+		public class LogoutMenu extends AbstractMenu {
 
-            @Override
-            protected void execAction() {
-                ClientSessionProvider.currentSession().stop();
-            }
-        }
-    }
+			@Override
+			protected String getConfiguredText() {
+				return TEXTS.get("Logout");
+			}
 
-    @Order(1000)
-    public class WorkOutlineViewButton extends AbstractOutlineViewButton {
+			@Override
+			protected void execAction() {
+				ClientSessionProvider.currentSession().stop();
+			}
+		}
+	}
 
-        public WorkOutlineViewButton() {
-            this(WorkOutline.class);
-        }
+	@Order(1000)
+	public class WorkOutlineViewButton extends AbstractOutlineViewButton {
+		@Override
+		public boolean isVisibleGranted() {
+			return !ClientSession.get().getCurrentUser().isSuperAdministrator();
+		}
 
-        protected WorkOutlineViewButton(Class<? extends WorkOutline> outlineClass) {
-            super(Desktop.this, outlineClass);
-        }
+		public WorkOutlineViewButton() {
+			this(WorkOutline.class);
+		}
 
-        @Override
-        protected String getConfiguredKeyStroke() {
-            return IKeyStroke.F2;
-        }
-    }
+		protected WorkOutlineViewButton(Class<? extends WorkOutline> outlineClass) {
+			super(Desktop.this, outlineClass);
+		}
 
+		@Override
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F2;
+		}
+	}
 
-    @Order(3000)
-    public class SettingsOutlineViewButton extends AbstractOutlineViewButton {
+	@Order(3000)
+	public class SettingsOutlineViewButton extends AbstractOutlineViewButton {
 
-        public SettingsOutlineViewButton() {
-            this(SettingsOutline.class);
-        }
+		public SettingsOutlineViewButton() {
+			this(SettingsOutline.class);
+		}
 
-        protected SettingsOutlineViewButton(Class<? extends SettingsOutline> outlineClass) {
-            super(Desktop.this, outlineClass);
-        }
+		protected SettingsOutlineViewButton(Class<? extends SettingsOutline> outlineClass) {
+			super(Desktop.this, outlineClass);
+		}
 
-        @Override
-        protected DisplayStyle getConfiguredDisplayStyle() {
-            return DisplayStyle.TAB;
-        }
+		@Override
+		protected DisplayStyle getConfiguredDisplayStyle() {
+			return DisplayStyle.TAB;
+		}
 
-        @Override
-        protected String getConfiguredKeyStroke() {
-            return IKeyStroke.F10;
-        }
-    }
+		@Override
+		public boolean isVisibleGranted() {
+			return !ClientSession.get().getCurrentUser().isSuperAdministrator();
+		}
 
-    @Order(3000)
-    public class AdministrationOutlineViewButton extends AbstractOutlineViewButton {
+		@Override
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F10;
+		}
+	}
 
-        public AdministrationOutlineViewButton() {
-            this(AdministrationOutline.class);
-        }
+	@Order(3000)
+	public class AdministrationOutlineViewButton extends AbstractOutlineViewButton {
 
-        protected AdministrationOutlineViewButton(Class<? extends AdministrationOutline> outlineClass) {
-            super(Desktop.this, outlineClass);
-        }
+		public AdministrationOutlineViewButton() {
+			this(AdministrationOutline.class);
+		}
 
-        @Override
-        protected DisplayStyle getConfiguredDisplayStyle() {
-            return DisplayStyle.TAB;
-        }
+		protected AdministrationOutlineViewButton(Class<? extends AdministrationOutline> outlineClass) {
+			super(Desktop.this, outlineClass);
+		}
 
-        @Override
-        protected String getConfiguredKeyStroke() {
-            return IKeyStroke.F10;
-        }
-    }
+		@Override
+		protected DisplayStyle getConfiguredDisplayStyle() {
+			return DisplayStyle.TAB;
+		}
+
+		@Override
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F10;
+		}
+	}
 }

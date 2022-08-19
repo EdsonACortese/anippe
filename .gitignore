@@ -28,5 +28,7 @@ target/
 # node
 node_modules
 pnpm-lock.yaml
-
+org.eclipse.*
+.project
+.classpath
 config.properties

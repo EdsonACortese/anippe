@@ -56,9 +56,9 @@ public class UiServletFilter implements Filter {
       return;
     }
 
-    if (m_developmentAccessController.handle(req, resp, chain)) {
+    /*if (m_developmentAccessController.handle(req, resp, chain)) {
       return;
-    }
+    }*/
 
     BEANS.get(ServletFilterHelper.class).forwardToLoginForm(req, resp);
   }
