@@ -1,6 +1,7 @@
 package com.velebit.anippe.client.work;
 
 import com.velebit.anippe.client.work.customer.CustomersTablePage;
+import com.velebit.anippe.client.work.expense.ExpensesTablePage;
 import com.velebit.anippe.client.work.lead.LeadsTablePage;
 import com.velebit.anippe.client.work.project.ProjectsTablePage;
 import com.velebit.anippe.client.work.task.TasksTablePage;
@@ -28,6 +29,7 @@ public class WorkOutline extends AbstractOutline {
     pageList.add(new CustomersTablePage());
     pageList.add(new LeadsTablePage());
     pageList.add(new ProjectsTablePage());
+    pageList.add(new ExpensesTablePage());
     pageList.add(new TasksTablePage());
     pageList.add(new TicketsTablePage());
     pageList.add(new UtilityNodePage());
