@@ -18,7 +18,6 @@ public class WorkOutline extends AbstractOutline {
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     super.execCreateChildPages(pageList);
-
   }
 
   @Override
