@@ -7,3 +7,8 @@ scout.devMode=true
 
 ### Service tunnel
 scout.auth.publicKey=MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIpA2EWlA1cTXK2sGEGPuMTh9cwWH2B3yCn7GXayIlLC1Qb7ZbKIpVRN8IsyhOOzrQxappjglTpEsCB9PBeq2oA==
+
+### DB Connection
+db.url=jdbc:postgresql://localhost:5432/anippe
+db.username=postgres
+db.password=postgres

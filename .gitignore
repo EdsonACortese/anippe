@@ -28,3 +28,5 @@ target/
 # node
 node_modules
 pnpm-lock.yaml
+
+config.properties
