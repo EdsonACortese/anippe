@@ -18,7 +18,6 @@ Anippe is new open source CRM project. Purpose is to build PerfexCRM copy. It is
 * Import project from GitHub
 * In projects (anippe.server.app.dev and anippe.client.app.dev) rename config.properties.example file to config.properties
 * Create empty PostgreSql database
-* Import SQL file
 * Edit anippe.server.app.dev config.properties file and insert your DB credentials
 <pre>
 ### DB Connection
