@@ -339,10 +339,19 @@ CREATE TABLE IF NOT EXISTS public.projects (
 	id serial primary key,
 	code character varying,
 	name character varying not null,
+	customer_id integer null,
+	status_id smallint not null,
+	description character varying null,
 	organisation_id integer not null,
 	created_at timestamp without time zone,
 	updated_at timestamp without time zone,
 	deleted_at timestamp without time zone
+);
+
+CREATE TABLE IF NOT EXISTS public.link_project_users (
+	id serial primary key,
+	project_id integer not null,
+	user_id integer not null
 );
 
 CREATE TABLE IF NOT EXISTS public.tickets (
