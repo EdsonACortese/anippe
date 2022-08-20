@@ -1,12 +1,7 @@
 package com.velebit.anippe.client;
 
-import com.velebit.anippe.client.Desktop.UserProfileMenu.ThemeMenu.DarkThemeMenu;
-import com.velebit.anippe.client.Desktop.UserProfileMenu.ThemeMenu.DefaultThemeMenu;
-import com.velebit.anippe.client.admin.AdministrationOutline;
-import com.velebit.anippe.client.settings.SettingsOutline;
-import com.velebit.anippe.client.work.WorkOutline;
-import com.velebit.anippe.shared.Icons;
-import com.velebit.anippe.shared.beans.User;
+import java.beans.PropertyChangeEvent;
+import java.util.List;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
@@ -24,8 +19,13 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.security.IAccessControlService;
 
-import java.beans.PropertyChangeEvent;
-import java.util.List;
+import com.velebit.anippe.client.Desktop.UserProfileMenu.ThemeMenu.DarkThemeMenu;
+import com.velebit.anippe.client.Desktop.UserProfileMenu.ThemeMenu.DefaultThemeMenu;
+import com.velebit.anippe.client.admin.AdministrationOutline;
+import com.velebit.anippe.client.settings.SettingsOutline;
+import com.velebit.anippe.client.work.WorkOutline;
+import com.velebit.anippe.shared.Icons;
+import com.velebit.anippe.shared.beans.User;
 
 /**
  * @author Luka

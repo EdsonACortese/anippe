@@ -316,8 +316,9 @@ CREATE TABLE IF NOT EXISTS public.users (
 	username character varying not null,
 	password character varying not null,
 	administrator boolean default false,
+	super_administrator boolean default false,
 	last_login_at timestamp without time zone null,
-	country_id smallint not null,
+	country_id smallint  null,
 	active boolean default true,
 	organisation_id integer,
 	created_at timestamp without time zone,
@@ -394,3 +395,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
 	deleted_at timestamp without time zone
 );
 
+--Insert admin user (admin/admin)
+INSERT INTO public.users (first_name, last_name, username, password, active, created_at, super_administrator)
+       SELECT 'Admin', 'Admin', 'admin', '$2a$10$he/WLHWq5lQ/h5VyO1/fJ.iCHVxb.dI6Ijx9JBWuUx7oegkEvWHWC', true, now(), true
+       WHERE NOT EXISTS (SELECT 1 FROM public.users WHERE username = 'admin');
