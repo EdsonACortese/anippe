@@ -14,6 +14,30 @@ import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 public class LeadFormData extends AbstractFormData {
 	private static final long serialVersionUID = 1L;
 
+	public Address getAddress() {
+		return getFieldByClass(Address.class);
+	}
+
+	public City getCity() {
+		return getFieldByClass(City.class);
+	}
+
+	public Company getCompany() {
+		return getFieldByClass(Company.class);
+	}
+
+	public Country getCountry() {
+		return getFieldByClass(Country.class);
+	}
+
+	public Description getDescription() {
+		return getFieldByClass(Description.class);
+	}
+
+	public Email getEmail() {
+		return getFieldByClass(Email.class);
+	}
+
 	public FirstName getFirstName() {
 		return getFieldByClass(FirstName.class);
 	}
@@ -22,11 +46,67 @@ public class LeadFormData extends AbstractFormData {
 		return getFieldByClass(LastName.class);
 	}
 
+	public Phone getPhone() {
+		return getFieldByClass(Phone.class);
+	}
+
+	public Position getPosition() {
+		return getFieldByClass(Position.class);
+	}
+
+	public PostalCode getPostalCode() {
+		return getFieldByClass(PostalCode.class);
+	}
+
+	public Website getWebsite() {
+		return getFieldByClass(Website.class);
+	}
+
+	public static class Address extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class City extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Company extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Country extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Description extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Email extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class FirstName extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 
 	public static class LastName extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Phone extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Position extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class PostalCode extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Website extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 }

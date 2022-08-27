@@ -17,6 +17,11 @@ public class AbstractActionsMenu extends AbstractMenu {
 	}
 
 	@Override
+	protected boolean getConfiguredVisible() {
+		return false;
+	}
+
+	@Override
 	protected String getConfiguredIconId() {
 		return Icons.Folder;
 	}
