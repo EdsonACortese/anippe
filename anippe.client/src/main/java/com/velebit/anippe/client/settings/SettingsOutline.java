@@ -7,6 +7,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+import com.velebit.anippe.client.settings.leads.LeadsNodePage;
 import com.velebit.anippe.client.settings.settings.SettingsNodePage;
 import com.velebit.anippe.client.settings.users.UsersNodePage;
 import com.velebit.anippe.shared.Icons;
@@ -32,6 +33,7 @@ public class SettingsOutline extends AbstractOutline {
 		super.execCreateChildPages(pageList);
 
 		pageList.add(new UsersNodePage());
+		pageList.add(new LeadsNodePage());
 		pageList.add(new SettingsNodePage());
 	}
 }

@@ -15,6 +15,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import com.velebit.anippe.client.common.fields.AbstractTextAreaField;
 import com.velebit.anippe.client.common.menus.AbstractActionsMenu;
@@ -45,8 +46,23 @@ import com.velebit.anippe.shared.FontIcons;
 import com.velebit.anippe.shared.work.lead.ILeadService;
 import com.velebit.anippe.shared.work.lead.LeadFormData;
 
+import db.migration.CountryLookupCall;
+
 @FormData(value = LeadFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class LeadForm extends AbstractForm {
+
+	private Integer leadId;
+
+	@FormData
+	public Integer getLeadId() {
+		return leadId;
+	}
+
+	@FormData
+	public void setLeadId(Integer leadId) {
+		this.leadId = leadId;
+	}
+
 	@Override
 	protected String getConfiguredTitle() {
 		return TEXTS.get("Lead");
@@ -193,11 +209,6 @@ public class LeadForm extends AbstractForm {
 
 			@Order(1000)
 			public class MainInformationsBox extends AbstractGroupBox {
-
-				@Override
-				protected boolean getConfiguredEnabled() {
-					return false;
-				}
 
 				@Override
 				protected String getConfiguredLabel() {
@@ -355,6 +366,16 @@ public class LeadForm extends AbstractForm {
 					protected String getConfiguredLabel() {
 						return TEXTS.get("Country");
 					}
+
+					@Override
+					public boolean isMandatory() {
+						return true;
+					}
+
+					@Override
+					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+						return CountryLookupCall.class;
+					}
 				}
 
 				@Order(10000)
@@ -416,6 +437,7 @@ public class LeadForm extends AbstractForm {
 		public class CancelButton extends AbstractCancelButton {
 
 		}
+
 	}
 
 	public void startModify() {
@@ -458,6 +480,7 @@ public class LeadForm extends AbstractForm {
 
 		@Override
 		protected void execPostLoad() {
+			getMainInformationsBox().setEnabled(false);
 			MenuUtility.getMenuByClass(getMainBox(), ActionsMenu.class).setVisible(true);
 			MenuUtility.getMenuByClass(getMainBox(), ConvertToCustomerMenu.class).setVisible(true);
 		}

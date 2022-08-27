@@ -4,6 +4,7 @@ import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
+import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 
 /**
  * <b>NOTE:</b><br>
@@ -44,6 +45,24 @@ public class LeadFormData extends AbstractFormData {
 
 	public LastName getLastName() {
 		return getFieldByClass(LastName.class);
+	}
+
+	/**
+	 * access method for property LeadId.
+	 */
+	public Integer getLeadId() {
+		return getLeadIdProperty().getValue();
+	}
+
+	/**
+	 * access method for property LeadId.
+	 */
+	public void setLeadId(Integer leadId) {
+		getLeadIdProperty().setValue(leadId);
+	}
+
+	public LeadIdProperty getLeadIdProperty() {
+		return getPropertyByClass(LeadIdProperty.class);
 	}
 
 	public Phone getPhone() {
@@ -91,6 +110,10 @@ public class LeadFormData extends AbstractFormData {
 	}
 
 	public static class LastName extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class LeadIdProperty extends AbstractPropertyData<Integer> {
 		private static final long serialVersionUID = 1L;
 	}
 
