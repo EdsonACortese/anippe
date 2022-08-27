@@ -1,6 +1,11 @@
 package com.velebit.anippe.client.work.lead;
 
+import java.util.Set;
+
 import org.eclipse.scout.rt.client.dto.Data;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
@@ -11,6 +16,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTabl
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
 import com.velebit.anippe.client.common.menus.AbstractAddMenu;
@@ -60,6 +66,28 @@ public class LeadsTablePage extends AbstractPageWithTable<Table> {
 			if (form.isFormStored()) {
 				reloadPage();
 			}
+		}
+	}
+
+	@Order(2000)
+	public class ImportMenu extends AbstractMenu {
+		@Override
+		protected String getConfiguredText() {
+			return TEXTS.get("Import");
+		}
+
+		@Override
+		protected String getConfiguredIconId() {
+			return FontIcons.Excel;
+		}
+
+		@Override
+		protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+			return CollectionUtility.hashSet(TreeMenuType.EmptySpace);
+		}
+
+		@Override
+		protected void execAction() {
 		}
 	}
 

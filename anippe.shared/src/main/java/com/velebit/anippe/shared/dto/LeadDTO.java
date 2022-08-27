@@ -1,12 +1,20 @@
-package com.velebit.anippe.shared.beans;
+package com.velebit.anippe.shared.dto;
 
-public class Lead implements java.io.Serializable {
+public class LeadDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private String firstName;
 	private String lastName;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -22,18 +30,6 @@ public class Lead implements java.io.Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getFullName() {
-		return firstName + " " + lastName;
 	}
 
 }

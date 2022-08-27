@@ -2,6 +2,7 @@ package com.velebit.anippe.client.work.lead;
 
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.MenuUtility;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -17,29 +18,32 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 
 import com.velebit.anippe.client.common.fields.AbstractTextAreaField;
 import com.velebit.anippe.client.common.menus.AbstractActionsMenu;
+import com.velebit.anippe.client.common.menus.AbstractDeleteMenu;
 import com.velebit.anippe.client.common.menus.AbstractEditMenu;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.ActionsMenu;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.CancelButton;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.ConvertToCustomerMenu;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.DocumentsBox;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.AddressField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.CityField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.CompanyField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.CountryField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.DescriptionField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.EmailField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.FirstNameField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.LastNameField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.PhoneField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.PositionField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.PostalCodeField;
+import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.WebsiteField;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.TasksBox;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.OkButton;
 import com.velebit.anippe.client.work.lead.LeadForm.MainBox.SaveButton;
 import com.velebit.anippe.shared.FontIcons;
 import com.velebit.anippe.shared.work.lead.ILeadService;
 import com.velebit.anippe.shared.work.lead.LeadFormData;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.FirstNameField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.LastNameField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.PositionField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.EmailField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.PhoneField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.WebsiteField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.CompanyField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.AddressField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.CityField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.CountryField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.DescriptionField;
-import com.velebit.anippe.client.work.lead.LeadForm.MainBox.MainTabBox.MainInformationsBox.PostalCodeField;
 
 @FormData(value = LeadFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class LeadForm extends AbstractForm {
@@ -152,6 +156,14 @@ public class LeadForm extends AbstractForm {
 				}
 			}
 
+			@Order(2000)
+			public class DeleteMenu extends AbstractDeleteMenu {
+
+				@Override
+				protected void execAction() {
+				}
+			}
+
 		}
 
 		@Order(2000)
@@ -159,6 +171,11 @@ public class LeadForm extends AbstractForm {
 			@Override
 			protected String getConfiguredText() {
 				return TEXTS.get("ConvertToCustomer");
+			}
+
+			@Override
+			protected boolean getConfiguredVisible() {
+				return false;
 			}
 
 			@Override
@@ -424,6 +441,9 @@ public class LeadForm extends AbstractForm {
 			exportFormData(formData);
 			formData = BEANS.get(ILeadService.class).create(formData);
 			importFormData(formData);
+
+			MenuUtility.getMenuByClass(getMainBox(), ActionsMenu.class).setVisible(true);
+			MenuUtility.getMenuByClass(getMainBox(), ConvertToCustomerMenu.class).setVisible(true);
 		}
 	}
 
@@ -434,6 +454,12 @@ public class LeadForm extends AbstractForm {
 			exportFormData(formData);
 			formData = BEANS.get(ILeadService.class).load(formData);
 			importFormData(formData);
+		}
+
+		@Override
+		protected void execPostLoad() {
+			MenuUtility.getMenuByClass(getMainBox(), ActionsMenu.class).setVisible(true);
+			MenuUtility.getMenuByClass(getMainBox(), ConvertToCustomerMenu.class).setVisible(true);
 		}
 
 		@Override

@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.tickets;
 DROP TABLE IF EXISTS public.projects;
 DROP TABLE IF EXISTS public.roles;
+DROP TABLE IF EXISTS public.leads;
+DROP TABLE IF EXISTS public.lead_sources;
+DROP TABLE IF EXISTS public.lead_statuses;
 
 
 CREATE TABLE IF NOT EXISTS public.countries
@@ -390,6 +393,57 @@ CREATE TABLE IF NOT EXISTS public.customers (
 	code character varying,
 	name character varying,
 	organisation_id integer not null,
+	created_at timestamp without time zone,
+	updated_at timestamp without time zone,
+	deleted_at timestamp without time zone
+);
+
+
+CREATE TABLE IF NOT EXISTS public.lead_sources (
+	id serial primary key,
+	code character varying,
+	name character varying,
+	color character varying,
+	organisation_id integer not null,
+	created_at timestamp without time zone,
+	updated_at timestamp without time zone,
+	deleted_at timestamp without time zone
+);
+
+CREATE TABLE IF NOT EXISTS public.lead_statuses (
+	id serial primary key,
+	code character varying,
+	name character varying,
+	color character varying,
+	order_number smallint not null,
+	organisation_id integer not null,
+	deleteable boolean default true,
+	created_at timestamp without time zone,
+	updated_at timestamp without time zone,
+	deleted_at timestamp without time zone
+);
+
+CREATE TABLE IF NOT EXISTS public.leads (
+	id serial primary key,
+	first_name character varying,
+	last_name character varying,
+	position character varying,
+	company character varying,
+	email character varying,
+	phone character varying,
+	website character varying,
+	address character varying,
+	city character varying,
+	postal_code character varying,
+	country_id smallint not null,
+	status_id smallint not null,
+	source_id smallint not null,
+	assigned_user_id integer not null,
+	description character varying,
+	is_lost boolean default false,
+	is_junk boolean default false,
+	organisation_id integer not null,
+	last_activity_at timestamp without time zone,
 	created_at timestamp without time zone,
 	updated_at timestamp without time zone,
 	deleted_at timestamp without time zone
