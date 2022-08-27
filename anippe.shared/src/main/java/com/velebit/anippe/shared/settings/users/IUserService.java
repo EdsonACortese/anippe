@@ -12,4 +12,6 @@ public interface IUserService extends IService {
     UserFormData load(UserFormData formData);
 
     UserFormData store(UserFormData formData);
+
+	void delete(Integer selectedValue);
 }

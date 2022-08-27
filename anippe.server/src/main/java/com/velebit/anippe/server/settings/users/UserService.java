@@ -23,4 +23,10 @@ public class UserService implements IUserService {
   public UserFormData store(UserFormData formData) {
     return formData;
   }
+
+@Override
+public void delete(Integer selectedValue) {
+	// TODO Auto-generated method stub
+	
+}
 }
