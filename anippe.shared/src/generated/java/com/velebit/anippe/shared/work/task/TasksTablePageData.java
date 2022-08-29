@@ -1,9 +1,13 @@
 package com.velebit.anippe.shared.work.task;
 
+import java.util.Date;
+
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
+
+import com.velebit.anippe.shared.beans.Task;
 
 /**
  * <b>NOTE:</b><br>
@@ -50,5 +54,75 @@ public class TasksTablePageData extends AbstractTablePageData {
 
 	public static class TasksTableRowData extends AbstractTableRowData {
 		private static final long serialVersionUID = 1L;
+		public static final String task = "task";
+		public static final String name = "name";
+		public static final String status = "status";
+		public static final String related = "related";
+		public static final String priority = "priority";
+		public static final String deadlineAt = "deadlineAt";
+		public static final String createdAt = "createdAt";
+		private Task m_task;
+		private String m_name;
+		private Long m_status;
+		private String m_related;
+		private Long m_priority;
+		private Date m_deadlineAt;
+		private Date m_createdAt;
+
+		public Task getTask() {
+			return m_task;
+		}
+
+		public void setTask(Task newTask) {
+			m_task = newTask;
+		}
+
+		public String getName() {
+			return m_name;
+		}
+
+		public void setName(String newName) {
+			m_name = newName;
+		}
+
+		public Long getStatus() {
+			return m_status;
+		}
+
+		public void setStatus(Long newStatus) {
+			m_status = newStatus;
+		}
+
+		public String getRelated() {
+			return m_related;
+		}
+
+		public void setRelated(String newRelated) {
+			m_related = newRelated;
+		}
+
+		public Long getPriority() {
+			return m_priority;
+		}
+
+		public void setPriority(Long newPriority) {
+			m_priority = newPriority;
+		}
+
+		public Date getDeadlineAt() {
+			return m_deadlineAt;
+		}
+
+		public void setDeadlineAt(Date newDeadlineAt) {
+			m_deadlineAt = newDeadlineAt;
+		}
+
+		public Date getCreatedAt() {
+			return m_createdAt;
+		}
+
+		public void setCreatedAt(Date newCreatedAt) {
+			m_createdAt = newCreatedAt;
+		}
 	}
 }

@@ -57,8 +57,14 @@ public class Desktop extends AbstractDesktop {
 	}
 
 	@Override
+	protected void execInit() {
+
+	}
+
+	@Override
 	protected void execDefaultView() {
 		selectFirstVisibleOutline();
+
 	}
 
 	protected void selectFirstVisibleOutline() {
@@ -179,6 +185,7 @@ public class Desktop extends AbstractDesktop {
 		}
 	}
 
+	
 	@Order(1000)
 	public class WorkOutlineViewButton extends AbstractOutlineViewButton {
 		@Override

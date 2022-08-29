@@ -388,10 +388,32 @@ CREATE TABLE IF NOT EXISTS public.activity_log (
 	deleted_at timestamp without time zone
 );
 
-CREATE TABLE IF NOT EXISTS public.customers (
+CREATE TABLE IF NOT EXISTS public.accounts (
 	id serial primary key,
 	code character varying,
 	name character varying,
+	website character varying,
+	address character varying,
+	city character varying,
+	postal_code character varying,
+	country_id smallint not null,
+	primary_contact_id integer null,
+	organisation_id integer not null,
+	created_at timestamp without time zone,
+	updated_at timestamp without time zone,
+	deleted_at timestamp without time zone
+);
+
+CREATE TABLE IF NOT EXISTS public.contacts (
+	id serial primary key,
+	code character varying,
+	first_name character varying,
+	last_name character varying,
+	position character varying,
+	email character varying,
+	phone character varying,
+	gsm character varying,
+	account_id integer null,
 	organisation_id integer not null,
 	created_at timestamp without time zone,
 	updated_at timestamp without time zone,
@@ -453,3 +475,11 @@ CREATE TABLE IF NOT EXISTS public.leads (
 INSERT INTO public.users (first_name, last_name, username, password, active, created_at, super_administrator)
        SELECT 'Admin', 'Admin', 'admin', '$2a$10$he/WLHWq5lQ/h5VyO1/fJ.iCHVxb.dI6Ijx9JBWuUx7oegkEvWHWC', true, now(), true
        WHERE NOT EXISTS (SELECT 1 FROM public.users WHERE username = 'admin');
+       
+--Create organisation 
+INSERT INTO public.organisations (name, subdomain, country_id, created_at) VALUES ('Test', 'test', 58, now());
+INSERT INTO public.organisation_settings (organisation_id) VALUES (1);
+
+--Create user for organisation admintest/admin
+INSERT INTO public.users (first_name, last_name, username, password, active, created_at, organisation_id, country_id, administrator)
+VALUES ('Admin', 'Test', 'admintest', '$2a$10$he/WLHWq5lQ/h5VyO1/fJ.iCHVxb.dI6Ijx9JBWuUx7oegkEvWHWC', true, now(), 1, 58, true);

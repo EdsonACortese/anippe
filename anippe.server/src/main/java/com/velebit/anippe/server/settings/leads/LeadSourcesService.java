@@ -9,7 +9,9 @@ public class LeadSourcesService implements ILeadSourcesService {
 	@Override
 	public LeadSourcesTablePageData getLeadSourcesTableData(SearchFilter filter) {
 		LeadSourcesTablePageData pageData = new LeadSourcesTablePageData();
-		// TODO [Luka] fill pageData.
+
+
+		
 		return pageData;
 	}
 }

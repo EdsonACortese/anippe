@@ -50,5 +50,15 @@ public class LeadSourcesTablePageData extends AbstractTablePageData {
 
 	public static class LeadSourcesTableRowData extends AbstractTableRowData {
 		private static final long serialVersionUID = 1L;
+		public static final String leadSourceId = "leadSourceId";
+		private Integer m_leadSourceId;
+
+		public Integer getLeadSourceId() {
+			return m_leadSourceId;
+		}
+
+		public void setLeadSourceId(Integer newLeadSourceId) {
+			m_leadSourceId = newLeadSourceId;
+		}
 	}
 }

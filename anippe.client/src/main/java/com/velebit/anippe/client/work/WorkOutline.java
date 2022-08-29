@@ -7,7 +7,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
-import com.velebit.anippe.client.work.customer.CustomersTablePage;
+import com.velebit.anippe.client.work.customer.CustomersNodePage;
 import com.velebit.anippe.client.work.expense.ExpensesTablePage;
 import com.velebit.anippe.client.work.lead.LeadsTablePage;
 import com.velebit.anippe.client.work.project.ProjectsTablePage;
@@ -26,10 +26,10 @@ public class WorkOutline extends AbstractOutline {
 	protected void execCreateChildPages(List<IPage<?>> pageList) {
 		super.execCreateChildPages(pageList);
 
-		pageList.add(new CustomersTablePage());
+		pageList.add(new CustomersNodePage());
 		pageList.add(new LeadsTablePage());
 		pageList.add(new ProjectsTablePage());
-		pageList.add(new ExpensesTablePage());
+		//pageList.add(new ExpensesTablePage());
 		pageList.add(new TasksTablePage());
 		pageList.add(new TicketsTablePage());
 		pageList.add(new UtilityNodePage());

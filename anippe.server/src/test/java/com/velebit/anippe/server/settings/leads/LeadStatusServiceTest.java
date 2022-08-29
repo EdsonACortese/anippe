@@ -1,15 +1,16 @@
-package com.velebit.anippe.server.work.customer;
+package com.velebit.anippe.server.settings.leads;
 
-import org.eclipse.scout.rt.server.IServerSession;
 import org.eclipse.scout.rt.testing.platform.runner.RunWithSubject;
 import org.eclipse.scout.rt.testing.server.runner.RunWithServerSession;
 import org.eclipse.scout.rt.testing.server.runner.ServerTestRunner;
 import org.junit.runner.RunWith;
 
+import com.velebit.anippe.server.ServerSession;
+
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)
-@RunWithServerSession(IServerSession.class)
-public class CustomersServiceTest {
-// TODO [Luka] add test cases
+@RunWithServerSession(ServerSession.class)
+public class LeadStatusServiceTest {
+	// TODO [Luka] add test cases
 
 }
